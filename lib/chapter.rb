@@ -3,10 +3,10 @@ class Chapter
 
 	def initialize
 		@chapter_id = Time.new.to_s
-		@serial = "it was a dark and stormy night"
-		@@chapters[@chapter_id] = @serial
+		@episode = "it was a dark and stormy night"
 		@choices = []
-		@associated_chapters = []
+		@prompt
+		@@chapters[@chapter_id] = self
 	end
 
   def Chapter.all_chapters
@@ -17,28 +17,51 @@ class Chapter
   	@@chapters.values_at(chapter_id)
   end
 
-  # def Chapter.choice_by_id chapter
-  #   @@chapters.values_at(chapter.chapter_id)[0]
-  # end
+  def Chapter.choices_by_id chapter_id
+    @@chapters.values_at(chapter_id).choices
+  end
 
-  # def Chapter.serial_by_id chapter
-  # 	@@chapters.values_at(chapter.chapter_id)[1]
-  # end
+  def Chapter.episode_by_id chapter
+  	@@chapters.values_at(chapter.chapter_id).episode
+  end
 
   def chapter_id
   	@chapter_id
   end
 
-  # def associated_chapters
-  # 	@associated_chapters
-  # end
+  def choices
+  	@choices
+  end
 
-  def add_serial serial
-  	@serial = serial
+  def episode
+  	@episode
+  end
+
+  def prompt
+  	@prompt
+  end
+
+  def add_episode episode
+  	@episode = episode
   end
 
   def add_choice choice
-    @choices << {Chapter.new.chapter_id => choice}
+  	associated_chapter = Chapter.new
+    @choices << {associated_chapter => choice}
+    associated_chapter.prompt = @choices[-1].value
+  end
+
+  def page
+		puts "#{current_chapter.prompt}\n\n"
+    puts "#{current_chapter.serial}\n\n"
+    counter = 0
+    current_chapter.choices.each do |choice|
+    	counter += 1
+    	puts "#{counter}. #{choice.value}\n"
+    end
+  	puts "Enter the number to select the choice"
+  	choice = gets.chomp.to_i
+    current_chapter = current_chapter.choices.[choice-1]
   end
 end
 

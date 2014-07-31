@@ -7,7 +7,17 @@ prolgue.add_choice("pick up the keys and walk to the road")
 prologue.add_choice("Put on the hat and head towards the sound of water")
 
 def main_menu
+	current_chapter
+	if Chapter.all_chapters.length == 4
+		clear screen
+		prologue.page
+  else
+  	clear screen
+  	current_chapter.page
+	end
+	main_menu
+end
 
-
-def adventure
-	puts
+def clear_screen
+  puts "\e[H\e[2J"
+end
