@@ -12,6 +12,6 @@ class Chapter
   	@@chapters.values_at(chapter_id)
 
 	def add_associated_chapter(chapter)
-	  @asspciated_chapters << {@chapter_id => [@choice, @serial]}
+	  @associated_chapters << @chapter_id
 	end
 end
