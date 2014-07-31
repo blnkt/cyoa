@@ -8,13 +8,13 @@ prologue.add_choice("Put on the hat and head towards the sound of water")
 
 current_chapter
 
-def menu
+def main_menu
 	if Chapter.all_chapters.length == 4
 		prologue.page
   else
   	current_chapter.page
 	end
-	menu
+	main_menu
 end
 
 def page
@@ -22,20 +22,28 @@ def page
 	puts "*******Enter (#) at any time to leave the adventure*******\n\n"
 	puts "#{current_chapter.previous_chapter.value}\n\n"
   puts "#{current_chapter.serial}\n\n"
-  counter = 0
-  current_chapter.choices.each do |choice|
-  	counter += 1
-  	puts "#{counter}. #{choice.value}\n"
-  end
+  choices_menu
+  page_menu
+end
+
+def page_menu
 	puts "Enter the number to select the choice\n\nEnter '<' to undo your choice\n"
-	choice = gets.chomp
+	input = gets.chomp
 	if input == "#"
-    adventure_restart
-  elsif input == "<"
-  	current_chapter.previous_chapter.page
+	  adventure_restart
+	elsif input == "<"
+		current_chapter.previous_chapter.page
 	else
-    current_chapter = current_chapter.choices.[choice-1]
-  end
+	  current_chapter = current_chapter.choices.[choice-1]
+	end
+end
+
+def choices_menu
+	counter = 0
+	current_chapter.choices.each do |choice|
+		counter += 1
+		puts "#{counter}. #{choice.value}\n"
+	end
 end
 
 def clear_screen
