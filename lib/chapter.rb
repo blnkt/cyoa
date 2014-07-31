@@ -5,7 +5,7 @@ class Chapter
 		@chapter_id = Time.new.to_s
 		@episode = "it was a dark and stormy night"
 		@choices = []
-		@prompt
+		@previous_chapter
 		@@chapters[@chapter_id] = self
 	end
 
@@ -37,8 +37,8 @@ class Chapter
   	@episode
   end
 
-  def prompt
-  	@prompt
+  def previous_chapter
+  	@previous_chapter
   end
 
   def add_episode episode
@@ -48,20 +48,7 @@ class Chapter
   def add_choice choice
   	associated_chapter = Chapter.new
     @choices << {associated_chapter => choice}
-    associated_chapter.prompt = @choices[-1].value
-  end
-
-  def page
-		puts "#{current_chapter.prompt}\n\n"
-    puts "#{current_chapter.serial}\n\n"
-    counter = 0
-    current_chapter.choices.each do |choice|
-    	counter += 1
-    	puts "#{counter}. #{choice.value}\n"
-    end
-  	puts "Enter the number to select the choice"
-  	choice = gets.chomp.to_i
-    current_chapter = current_chapter.choices.[choice-1]
+    associated_chapter.last_chapter = @choices[-1]
   end
 end
 
