@@ -1,32 +1,31 @@
 class Chapter
 	@@chapters = {}
 
-	def initialize
+	def initialize adventure_id
+    @adventure_id = adventure_id
 		@chapter_id = Time.new.to_s
 		@episode = "it was a dark and stormy night"
 		@choices = []
-		@previous_chapter
-		@@chapters[@chapter_id] = self
+		@previous_chapter = []
+		@@chapters[self] = adventure_id
 	end
 
   def Chapter.all_chapters
   	@@chapters
   end
 
-  def Chapter.chapter_by_id chapter_id
-  	@@chapters.values_at(chapter_id)
+  def Chapter.chapters_by_id adventure_id
+  	# @@chapters.each do |key, value|
+   #    if key == adventure_id
+   #      value
+   #    end
+   #  end
+
+    @@chapters.keys_at(adventure_id)
   end
 
-  def Chapter.choices_by_id chapter_id
-    @@chapters.values_at(chapter_id).choices
-  end
-
-  def Chapter.episode_by_id chapter
-  	@@chapters.values_at(chapter.chapter_id).episode
-  end
-
-  def chapter_id
-  	@chapter_id
+  def adventure_id
+  	@adventure_id
   end
 
   def choices
@@ -46,9 +45,8 @@ class Chapter
   end
 
   def add_choice choice
-  	associated_chapter = Chapter.new
-    @choices << {associated_chapter => choice}
-    associated_chapter.last_chapter = @choices[-1]
+    additional_chapter = Chapter.new(@adventure_id)
+    @choices << {choice => additional_chapter}
   end
 end
 
