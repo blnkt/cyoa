@@ -24,8 +24,9 @@ describe 'Chapter' do
 			beatles_chapter = Chapter.new({:episode => "they came in through the bathroom window"})
 
 			beatles_chapter.add_choice("walk away")
-			# p beatles_chapter.choices
 			expect(beatles_chapter.choices.keys).to eq(["walk away"])
+			choice_chapter = beatles_chapter.choices.values_at("walk away")[0]
+			expect(choice_chapter.last_choice).to eq(beatles_chapter)
 		end
   end
 

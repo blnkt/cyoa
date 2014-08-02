@@ -29,8 +29,9 @@ class Chapter
   end
 
   def add_choice(choice)
-    choice_chapter = Chapter.new({:episode => "hello world"})
+    choice_chapter = Chapter.new({:episode => "hello world", :last_choice => self})
     @choices[choice.to_s] = choice_chapter
+
   end
 
 
