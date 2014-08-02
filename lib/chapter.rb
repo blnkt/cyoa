@@ -1,21 +1,16 @@
 class Chapter
 	@@chapters = []
 
-  attr_reader :episode, :choices, :last_choice
+  attr_reader :episode, :choices, :last_choice, :adventure_id
 
 	def initialize attributes
 
-    @adventure_id = Time.new.to_s
+    @adventure_id = attributes[:adventure_id]
 		@episode = attributes[:episode]
-		@choices = []
+		@choices = {}
 		@last_choice = attributes[:last_choice]
-    @choices << @last_choice
     @@chapters << self
 	end
-
-  def adventure_id
-    @adventure_id
-  end
 
   def Chapter.all_chapters
   	@@chapters
@@ -32,6 +27,13 @@ class Chapter
     end
     target_chapters
   end
+
+  def add_choice(choice)
+    choice_chapter = Chapter.new({:episode => "hello world"})
+    @choices[choice.to_s] = choice_chapter
+  end
+
+
 
 
   # def Chapter.chapters_by_id adventure_id

@@ -18,14 +18,16 @@ describe 'Chapter' do
 		# end
   # end
 
-  # describe '#add_choice' do
-		# it "adds a choice to a chapter" do
-		# 	new_chapter = Chapter.new(1)
-		# 	new_chapter.add_choice("walk away")
-  #     p new_chapter.choices
-		# 	expect(new_chapter.choices.length).to eq(1)
-		# end
-  # end
+  describe '#add_choice' do
+		it "adds target chapter as a choice for chapter" do
+			dummy_chapter = Chapter.new ({:episode => "I'm nobody's fool"})
+			beatles_chapter = Chapter.new({:episode => "they came in through the bathroom window"})
+
+			beatles_chapter.add_choice("walk away")
+			# p beatles_chapter.choices
+			expect(beatles_chapter.choices.keys).to eq(["walk away"])
+		end
+  end
 
   describe '.by_id' do
   	it "finds chapters by their adventure ID" do
