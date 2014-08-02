@@ -27,14 +27,18 @@ describe 'Chapter' do
 		# end
   # end
 
-  # describe '.chapters_by_id' do
-  # 	it "finds a chapter by its ID" do
-  # 		new_chapter = Chapter.new (1)
-  #     second_chapter = Chapter.new (1)
-  # 		Chapter.chapters_by_id(1)
-  # 		expect(Chapter.chapters_by_id(1).length).to eq(2)
-  # 	end
-  # end
+  describe '.by_id' do
+  	it "finds chapters by their adventure ID" do
+  		new_chapter = Chapter.new ({:episode => "it was a dark and stormy night"})
+  		another_chapter = Chapter.new ({:episode => "convicts on the brain and batman on tv"})
+  		next_chapter = Chapter.new ({:episode => "I could take more of the latter and less of the former."})
+  		new_chapter.add_id(1)
+  		another_chapter.add_id(1)
+  		next_chapter.add_id(2)
+  		Chapter.by_id(1)
+  		expect(Chapter.by_id(1).length).to eq(2)
+  	end
+  end
 end
 
 describe 'Adventure' do

@@ -8,4 +8,9 @@ class Adventure
     @chapter = attributes[:chapter]
     @@adventures << {attributes[:adventure_id] => [attributes[:chapter]]}
   end
+
+  def add_chapter chapter
+  end
+
+
 end
