@@ -1,14 +1,13 @@
 class Chapter
 	@@chapters = []
 
-  attr_reader :episode, :choices, :last_choice, :adventure_id
+  attr_reader :episode, :choices
 
 	def initialize attributes
-
-    @adventure_id = attributes[:adventure_id]
-		@episode = attributes[:episode]
+    # @adventure_id = attributes[:adventure_id]
+		@episode = "This choice needs your adventure!"
 		@choices = {}
-		@last_choice = attributes[:last_choice]
+    # @parent_chapter = []
     @@chapters << self
 	end
 
@@ -16,40 +15,30 @@ class Chapter
   	@@chapters
   end
 
-  def add_id new_adventure_id
-    @adventure_id = new_adventure_id
+  def add_episode episode
+    @episode = episode.to_s
   end
+
+  # def add_id new_adventure_id
+  #   @adventure_id = new_adventure_id
+  # end
   
-  def Chapter.by_id target_adventure_id
-    target_chapters = []
-    @@chapters.each do |chapter|
-      target_chapters << chapter if chapter.adventure_id == target_adventure_id
-    end
-    target_chapters
-  end
+  # def add_parent_chapter parent_choice, parent_chapter
+  #   @parent_chapter[parent_chapter] = parent_choice.to_s
+  # end
 
-  def add_choice(choice)
-    choice_chapter = Chapter.new({:episode => "hello world", :last_choice => self})
+  # def Chapter.by_id target_adventure_id
+  #   target_chapters = []
+  #   @@chapters.each do |chapter|
+  #     target_chapters << chapter if chapter.adventure_id == target_adventure_id
+  #   end
+  #   target_chapters
+  # end
+
+  def add_choice choice
+    choice_chapter = Chapter.new({:episode => "Zippy!!",})
+    choice_chapter.choices["parent_chapter"] = choice.to_s #b/c the first choice is always going back
     @choices[choice.to_s] = choice_chapter
-
   end
-
-
-
-
-  # def Chapter.chapters_by_id adventure_id
-  # 	# @@chapters.each do |key, value|
-  #  #    if key == adventure_id
-  #  #      value
-  #  #    end
-  #  #  end
-
-  #   @@chapters.keys_at(adventure_id)
-  # end
-
-  # def add_choice choice
-  #   additional_chapter = Chapter.new(@adventure_id)
-  #   @choices << {choice => additional_chapter}
-  # end
 end
 

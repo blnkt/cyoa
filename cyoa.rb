@@ -1,27 +1,28 @@
-require './lib/chapter'
+# require './lib/chapter'
 
-prologue = Chapter.new
-prologue.add_serial("You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat.")
+prologue = Chapter.new({:episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat."})
 prologue.add_choice ("Walk the bike out of the field to a nearby road")
 prolgue.add_choice("pick up the keys and walk to the road")
 prologue.add_choice("Put on the hat and head towards the sound of water")
 
-current_chapter
+current_chapter = prologe
 
 def main_menu
-	if Chapter.all_chapters.length == 4
-		prologue.page
+	if Chapter.all_chapters.length < 4
+		page(prologue)
   else
-  	current_chapter.page
+  	page(current_chapter)
 	end
 	main_menu
 end
 
-def page
+def page chapter
 	clear_screen
+	chapter_prompt = chapter.choices.values_at("parent_chapter")
 	puts "*******Enter (#) at any time to leave the adventure*******\n\n"
-	puts "#{current_chapter.previous_chapter.value}\n\n"
-  puts "#{current_chapter.serial}\n\n"
+	puts "#{chapter_prompt}\n\n"
+  puts "#{chapter.episode}\n\n"
+  if chapter.episode "This choice needs your adventure!"
   choices_menu
   page_menu
 end

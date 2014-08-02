@@ -1,6 +1,5 @@
 require 'rspec'
 require 'chapter'
-require 'adventure'
 
 describe 'Chapter' do
   describe ".initialize" do
@@ -10,46 +9,34 @@ describe 'Chapter' do
 		end
 	end
     
-  # describe '#add_episode' do
-		# it "adds an episode to a chapter" do
-		# 	new_chapter = Chapter.new(1)
-		# 	new_chapter.add_episode("Insanity is repeating the same action and expecting a different result")
-		# 	expect(new_chapter.episode).to eq("Insanity is repeating the same action and expecting a different result")
-		# end
-  # end
-
   describe '#add_choice' do
 		it "adds target chapter as a choice for chapter" do
 			dummy_chapter = Chapter.new ({:episode => "I'm nobody's fool"})
 			beatles_chapter = Chapter.new({:episode => "they came in through the bathroom window"})
-
 			beatles_chapter.add_choice("walk away")
-			expect(beatles_chapter.choices.keys).to eq(["walk away"])
 			choice_chapter = beatles_chapter.choices.values_at("walk away")[0]
-			expect(choice_chapter.last_choice).to eq(beatles_chapter)
+
+			expect(beatles_chapter.choices.keys).to eq(["walk away"])
+			expect(choice_chapter.choices.keys).to eq(["parent_chapter"])
+
 		end
   end
 
-  describe '.by_id' do
-  	it "finds chapters by their adventure ID" do
-  		new_chapter = Chapter.new ({:episode => "it was a dark and stormy night"})
-  		another_chapter = Chapter.new ({:episode => "convicts on the brain and batman on tv"})
-  		next_chapter = Chapter.new ({:episode => "I could take more of the latter and less of the former."})
-  		new_chapter.add_id(1)
-  		another_chapter.add_id(1)
-  		next_chapter.add_id(2)
-  		Chapter.by_id(1)
-  		expect(Chapter.by_id(1).length).to eq(2)
-  	end
+  describe '#add_episode' do
+    it "adds an episode text to a chapter" do
+    	unexpected_astronaut = Chapter.new({:episode => "This choice is not your adventure."})
+    	unexpected_astronaut.add_episode("No one ever expects the unexpected astronaut!!")
+    	expect(unexpected_astronaut.episode).to eq("No one ever expects the unexpected astronaut!!")
+    end
   end
 end
 
-describe 'Adventure' do
-  describe ".initialize" do
-	  it "intializes adventure with a chapter and/or an ID" do
-	  	stormy_chapter = Chapter.new({:episode => "it was a dark and stormy night"})
-	    new_adventure = Adventure.new(:chapter => stormy_chapter, :adventure_id => stormy_chapter.adventure_id)
-	  	expect(new_adventure).to be_an_instance_of Adventure
-		end
-	end
-end
+# describe 'Adventure' do
+#   describe ".initialize" do
+# 	  it "intializes adventure with a chapter and/or an ID" do
+# 	  	stormy_chapter = Chapter.new({:episode => "it was a dark and stormy night"})
+# 	    new_adventure = Adventure.new(:chapter => stormy_chapter, :adventure_id => stormy_chapter.adventure_id)
+# 	  	expect(new_adventure).to be_an_instance_of Adventure
+# 		end
+# 	end
+# end
