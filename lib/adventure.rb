@@ -1,16 +1,12 @@
-class Adventure
-  @@adventures = []
+# class Adventure
   
-  attr_reader :adventure_id, :chapter
+#   attr_reader :chapters
 
-	def initialize attributes 
-    @adventure_id = attributes[:adventure_id]
-    @chapter = attributes[:chapter]
-    @@adventures << {attributes[:adventure_id] => [attributes[:chapter]]}
-  end
+# 	def initialize attributes 
+#     @chapters = [attributes[:chapter]]
+#   end
 
-  def add_chapter chapter
-  end
-
-
-end
+#   def add_chapter chapter
+#   	@chapters << chapter
+#   end
+# end

@@ -15,9 +15,10 @@ describe 'Chapter' do
 			beatles_chapter = Chapter.new({:episode => "they came in through the bathroom window"})
 			beatles_chapter.add_choice("walk away")
 			choice_chapter = beatles_chapter.choices.values_at("walk away")[0]
-
+      
+      expect(choice_chapter.parent_chapter).to eq([beatles_chapter])
 			expect(beatles_chapter.choices.keys).to eq(["walk away"])
-			expect(choice_chapter.choices.keys).to eq(["parent_chapter"])
+			expect(choice_chapter.choices.keys).to eq(["parent chapter text"])
 
 		end
   end
@@ -30,13 +31,3 @@ describe 'Chapter' do
     end
   end
 end
-
-# describe 'Adventure' do
-#   describe ".initialize" do
-# 	  it "intializes adventure with a chapter and/or an ID" do
-# 	  	stormy_chapter = Chapter.new({:episode => "it was a dark and stormy night"})
-# 	    new_adventure = Adventure.new(:chapter => stormy_chapter, :adventure_id => stormy_chapter.adventure_id)
-# 	  	expect(new_adventure).to be_an_instance_of Adventure
-# 		end
-# 	end
-# end
