@@ -49,8 +49,8 @@ describe 'Adventure' do
 
   describe "#initialize" do
     it "initializes an Adventure (i.e. an adventurer's reading/writing of the available chapters" do
-      new_adventure = Adventure.new({:branch_id => 1})
-      another_adventure = Adventure.new({:branch_id => 2})
+      new_adventure = Adventure.new({:name => "blnkt"})
+      another_adventure = Adventure.new({:name => "blnkt"})
       expect(new_adventure).to be_an_instance_of(Adventure)
       expect(Adventure.all_adventures.length).to eq(2)
     end
@@ -67,28 +67,45 @@ describe 'Adventure' do
     it "adds a chapter to an adventurer's progress" do
       four_adventure = Adventure.new({:name => "Bill"})
       four_adventure.add_chapter(1)
-      expect(four_adventure.progress).to eq([1])
-    end
-  end
-
-  describe "#add_new_branch?" do
-    it "appends Adventurer's progress since last divergence/backtrack to branches" do
-      five_adventure = Adventure.new({:name => "Samatowic"}, {:branch_id => 2})
-      five_adventure.add_chapter(5)
-      five_adventure.add_chapter(7)
-      five_adventure.add_new_branch?
-      expect(five_adventure.branches.length).to eq([2])
+      four_adventure.add_chapter(2)
+      four_adventure.add_chapter(3)
+      expect(four_adventure.progress).to eq([1, 2, 3])
     end
 
-    it "appends Adventurer's progress since last divergence/backtrack to branches" do
+    it "adds a chapter to an adventurer's progress" do
       six_adventure = Adventure.new({:name => "William"})
       six_adventure.add_chapter(1)
       six_adventure.add_chapter(2)
       six_adventure.add_chapter(3)
-      six_adventure.add_new_branch?
-      six_adventure.add_chapter(4)
-      six_adventure.add_new_branch?
-      expect(six_adventure.branches.length).to eq([2])
+      six_adventure.add_chapter(2)
+      expect(six_adventure.progress).to eq([1, 2, 3])
     end
   end
+
+  # describe "#add_new_branch?" do
+  #   it "appends Adventurer's progress since last divergence/backtrack to branches" do
+  #     five_adventure = Adventure.new({:name => "Samatowic"})
+  #     five_adventure.add_chapter(5)
+  #     five_adventure.add_chapter(7)
+  #     expect(five_adventure.branches.length).to eq(1)
+  #   end
+
+  #   # it "appends Adventurer's progress since last divergence/backtrack to branches" do
+  #   #   six_adventure = Adventure.new({:name => "William"})
+  #   #   six_adventure.add_chapter(1)
+  #   #   six_adventure.add_chapter(2)
+  #   #   six_adventure.add_chapter(3)
+  #   #   six_adventure.add_new_branch?
+  #   #   p six_adventure.branch_id
+  #   #   p six_adventure.progress
+  #   #   p six_adventure.branches
+  #   #   # p six_adventure.branch_id
+  #   #   six_adventure.add_chapter(4)
+  #   #   p six_adventure.progress
+  #   #   six_adventure.add_new_branch?
+  #   #   p six_adventure.branches
+  #   #   p six_adventure.branch_id
+  #   #   expect(six_adventure.branches.length).to eq(2)
+  #   # end
+  # end
 end
