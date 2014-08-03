@@ -48,11 +48,11 @@ describe 'Adventure' do
   end
 
   describe "#initialize" do
-    it "initializes an Adventure: adventurer's reading/writing" do
+    it "initializes an Adventure (i.e. an adventurer's reading/writing of the available chapters" do
       new_adventure = Adventure.new({:branch_id => 1})
       another_adventure = Adventure.new({:branch_id => 2})
       expect(new_adventure).to be_an_instance_of(Adventure)
-      expect(@@adventures).to eq(2)
+      expect(Adventure.all_adventures.length).to eq(2)
     end
   end
 

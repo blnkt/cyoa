@@ -10,6 +10,10 @@ class Adventure
     @@adventures << self
   end
 
+  def Adventure.all_adventures
+  	@@adventures
+  end
+
   def add_chapter chapter_id
   	@progress << chapter_id
   end
